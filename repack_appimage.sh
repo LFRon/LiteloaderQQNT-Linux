@@ -48,12 +48,13 @@ function patch_resources() {
 }
 
 # 获取qq appimage 最新链接
+# 这里使用手动构建
 function get_qqnt_appimage_url() {
-    [ "$os_arch" != "x86_64" ] && os_arch="arm64"
-    check_url="$(wget -t3 -T3 -q -O- https://im.qq.com/linuxqq/index.shtml| grep -o 'https://.*linuxQQDownload.js?[^"]*')"
-    appimage_url=$(wget -t3 -T3 -q -O- "$check_url" | grep -o 'https://[^,]*AppImage' | grep "$os_arch")
-
-    [ -z "$appimage_url" ] && { echo "获取qq下载链接失败"; exit 1; }
+    if [ "$os_arch" == "x86_64" ]; then
+        appimage_url="https://dldir1v6.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.19_250904_x86_64_01.AppImage";
+    elif [ "$os_arch" == "arm64" ]; then
+        appimage_url="https://dldir1v6.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.19_250904_arm64_01.AppImage";
+    fi
     echo "$appimage_url"
 }
 
