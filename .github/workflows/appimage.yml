@@ -1,0 +1,77 @@
+name: Linux AppImage
+
+on:
+  push:
+    paths:
+      - 'repack_appimage.sh'
+      - '.github/workflows/appimage.yml'
+  pull_request:
+    paths:
+      - 'repack_appimage.sh'
+      - '.github/workflows/appimage.yml'
+  workflow_dispatch:
+
+jobs:
+  x86_64:
+    name: Repack for x86_64
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get install -y libgtk-3-0 libnotify4 libnss3 libxss1 libxtst6 xdg-utils libatspi2.0-0 libuuid1 libsecret-1-0 squashfs-tools libfuse2
+
+    - name: Repack qqnt appimage
+      id: repack
+      run: |
+        chmod +x repack_appimage.sh
+        ARCH=x86_64 ./repack_appimage.sh
+        file=$(find . -iname "*x86_64*" -printf "%f\n")
+        echo "file=$file" >> $GITHUB_OUTPUT
+
+    - name: Check output and directory existence
+      run: |
+        appimage_path=${{ steps.repack.outputs.file }}
+        if ./$appimage_path --logging-enable 2>&1| grep -q "succeeded" && [ -d "$HOME/.config/QQ/LiteLoader/plugins" ]; then
+          echo "$appimage_path can be started and \$HOME/.config/QQ/LiteLoader/plugins directory exists. Test succeeded."
+        else
+          echo "$appimage_path cannot be started or \$HOME/.config/QQ/LiteLoader/plugins directory does not exist. Test failed."
+          # exit 1
+        fi
+
+    - name: Upload QQ # 手动触发时上传
+      if: github.event_name == 'workflow_dispatch'
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ steps.repack.outputs.file }}
+        path: ${{ steps.repack.outputs.file }}
+
+  arm64:
+    name: Repack for arm64
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get install -y libgtk-3-0 libnotify4 libnss3 libxss1 libxtst6 xdg-utils libatspi2.0-0 libuuid1 libsecret-1-0 squashfs-tools libfuse2
+
+    - name: Repack qqnt appimage
+      id: repack
+      run: |
+        chmod +x repack_appimage.sh
+        ARCH=arm64 ./repack_appimage.sh
+        file=$(find . -iname "*arm64*" -printf "%f\n")
+        echo "file=$file" >> $GITHUB_OUTPUT
+
+    - name: Upload QQ # 手动触发时上传
+      if: github.event_name == 'workflow_dispatch'
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ steps.repack.outputs.file }}
+        path: ${{ steps.repack.outputs.file }}
