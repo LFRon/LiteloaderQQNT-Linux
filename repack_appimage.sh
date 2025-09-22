@@ -3,7 +3,7 @@
 os_arch=${ARCH:=$(uname -m)}
 
 [ "$os_arch" = "x86_64" ] && _arch="$os_arch" || _arch="aarch64"
-runtime_url="https://github.com/AppImage/AppImageKit/releases/download/13/runtime-$_arch"
+runtime_url="https://github.com/AppImage/AppImageKit/releases/download/13/obsolete-runtime-$_arch"
 
 echo "正在获取 LiteLoaderQQNT 版本..."
 liteloaderqqnt_check_url="https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/latest"
