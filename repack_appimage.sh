@@ -14,7 +14,7 @@ echo "最新 LiteLoaderQQNT 版本：$liteloaderqqnt_version"
 workdir="$PWD"
 
 # 创建并切换至临时目录
-temp_dir=$(mktemp -d)
+temp_dir=/tmp/LiteloaderQQNT_Repackage
 echo "临时目录创建成功: $temp_dir"
 cd "$temp_dir" || exit 1
 
