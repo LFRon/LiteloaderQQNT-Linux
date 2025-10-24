@@ -11,19 +11,12 @@ liteloaderqqnt_version=$(basename "$(wget -t3 -T3 --spider "$liteloaderqqnt_chec
 liteloaderqqnt_url="https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/latest/download/LiteLoaderQQNT.zip"
 echo "最新 LiteLoaderQQNT 版本：$liteloaderqqnt_version"
 
-workdir="$PWD"
-
 # 创建并切换至临时目录
 temp_dir=/tmp/LiteloaderQQNT_Repackage
+workdir=/tmp/LiteloaderQQNT_Repackage
 mkdir -p $temp_dir
 echo "临时目录创建成功: $temp_dir"
 cd "$temp_dir" || exit 1
-
-cleanup() {
-    echo "清理临时目录: $temp_dir"
-    rm -rf "$temp_dir"
-}
-trap cleanup EXIT
 
 # 修补 resources，创建 *.js 文件，并修改 package.json
 function patch_resources() {
