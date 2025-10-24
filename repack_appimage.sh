@@ -86,6 +86,7 @@ function calc_appimage_offset() {
 # 提取 appimage 内容
 function extract_appimage() {
     local appimage_file="$1"
+    chmod 755 ./"$appimage_file"
     if ! ./"$appimage_file" --appimage-extract >/dev/null 2>&1; then
         echo "执行 --appimage-extract 失败，尝试手动提取..."
         offset=$(calc_appimage_offset "$appimage_file")
