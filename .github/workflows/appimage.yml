@@ -29,7 +29,7 @@ jobs:
       run: |
         chmod +x repack_appimage.sh
         ARCH=x86_64 ./repack_appimage.sh
-        file=/tmp/LiteloaderQQNT_Repackage/*.AppImage
+        file=/tmp/LiteloaderQQNT_Repackage/QQ_3.2.20_251023_x86_64_01_patch-1.3.0.AppImage
 
     - name: Check output and directory existence
       run: |
@@ -60,7 +60,7 @@ jobs:
       run: |
         chmod +x repack_appimage.sh
         ARCH=arm64 ./repack_appimage.sh
-        file=/tmp/LiteloaderQQNT_Repackage/*.AppImage
+        file=/tmp/LiteloaderQQNT_Repackage/QQ_3.2.20_251023_arm64_01_patch-1.3.0.AppImage
         echo "file=$file" >> $GITHUB_OUTPUT
 
     - name: Upload QQ # 手动触发时上传
