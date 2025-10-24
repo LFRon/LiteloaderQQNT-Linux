@@ -15,6 +15,7 @@ workdir="$PWD"
 
 # 创建并切换至临时目录
 temp_dir=/tmp/LiteloaderQQNT_Repackage
+mkdir -p $temp_dir
 echo "临时目录创建成功: $temp_dir"
 cd "$temp_dir" || exit 1
 
