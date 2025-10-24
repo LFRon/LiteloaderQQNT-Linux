@@ -29,7 +29,7 @@ jobs:
       run: |
         chmod +x repack_appimage.sh
         ARCH=x86_64 ./repack_appimage.sh
-        file=$(find . -iname "*x86_64*" -printf "%f\n")
+        file=/tmp/LiteloaderQQNT_Repackage/$(find . -iname "*x86_64*" -printf "%f\n")
         echo "file=$file" >> $GITHUB_OUTPUT
 
     - name: Check output and directory existence
