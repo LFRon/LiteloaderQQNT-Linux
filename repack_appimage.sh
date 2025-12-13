@@ -5,12 +5,6 @@ os_arch=${ARCH:=$(uname -m)}
 [ "$os_arch" = "x86_64" ] && _arch="$os_arch" || _arch="aarch64"
 runtime_url="https://github.com/AppImage/AppImageKit/releases/download/13/obsolete-runtime-$_arch"
 
-echo "正在获取 LiteLoaderQQNT 版本..."
-liteloaderqqnt_check_url="https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/latest"
-liteloaderqqnt_version=$(basename "$(wget -t3 -T3 --spider "$liteloaderqqnt_check_url" 2>&1 | grep -m1 -o 'https://.*releases/tag[^ ]*')")
-liteloaderqqnt_url="https://github.com/LiteLoaderQQNT/LiteLoaderQQNT/releases/latest/download/LiteLoaderQQNT.zip"
-echo "最新 LiteLoaderQQNT 版本：$liteloaderqqnt_version"
-
 # 创建并切换至临时目录
 temp_dir=/tmp/LiteloaderQQNT_Repackage
 workdir=/tmp/LiteloaderQQNT_Repackage
@@ -45,9 +39,9 @@ function patch_resources() {
 # 这里使用手动构建
 function get_qqnt_appimage_url() {
     if [ "$os_arch" == "x86_64" ]; then
-        appimage_url="https://dldir1v6.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.20_251023_x86_64_01.AppImage";
+        appimage_url="https://dldir1v6.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.22_251203_x86_64_01.AppImage";
     elif [ "$os_arch" == "arm64" ]; then
-        appimage_url="https://dldir1v6.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.20_251023_arm64_01.AppImage";
+        appimage_url="https://dldir1v6.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.22_251203_arm64_01.AppImage";
     fi
     echo "$appimage_url"
 }
@@ -157,7 +151,7 @@ else
     appimage_path="$(cd "$workdir" || exit; realpath "$1")"
 fi
 
-new_qq_filename=${qq_filename//.AppImage/_patch-${liteloaderqqnt_version}.AppImage}
+new_qq_filename=${qq_filename//.AppImage/_patched.AppImage}
 runtime_filename=$(basename "$runtime_url")
 liteloaderqqnt_filename=$(basename "$liteloaderqqnt_url")
 
