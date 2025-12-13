@@ -35,7 +35,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Liteloader_QQNT_x86_64.appimage
-        path: /tmp/LiteloaderQQNT_Repackage/QQ_3.2.22_251203_x86_64_01_patched.AppImage
+        path: /tmp/LiteloaderQQNT_Repackage/LiteloaderQQNT_Patched_x86_64.AppImage
 
   arm64:
     name: Repack for arm64
@@ -60,4 +60,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: Liteloader_QQNT_aarch64.appimage
-        path: /tmp/LiteloaderQQNT_Repackage/QQ_3.2.22_251203_arm64_01_patched.AppImage
+        path: /tmp/LiteloaderQQNT_Repackage/LiteloaderQQNT_Patched_aarch64.AppImage

@@ -157,7 +157,7 @@ else
     appimage_path="$(cd "$workdir" || exit; realpath "$1")"
 fi
 
-new_qq_filename=${qq_filename//.AppImage/_patched.AppImage}
+new_qq_filename="LiteloaderQQNT_Patched_${_arch}.AppImage"
 runtime_filename=$(basename "$runtime_url")
 liteloaderqqnt_filename=$(basename "$liteloaderqqnt_url")
 
