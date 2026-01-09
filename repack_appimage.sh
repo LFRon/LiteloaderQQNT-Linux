@@ -45,9 +45,9 @@ function patch_resources() {
 # 这里使用手动构建
 function get_qqnt_appimage_url() {
     if [ "$os_arch" == "x86_64" ]; then
-        appimage_url="https://dldir1v6.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.22_251203_x86_64_01.AppImage";
+        appimage_url="https://dldir1v6.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.23_260108_x86_64_01.AppImage";
     elif [ "$os_arch" == "arm64" ]; then
-        appimage_url="https://dldir1v6.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.22_251203_arm64_01.AppImage";
+        appimage_url="https://dldir1v6.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.23_260108_arm64_01.AppImage";
     fi
     echo "$appimage_url"
 }
